@@ -2,3 +2,7 @@ language: go
 
 go:
   - master
+
+script:
+  - go get -v ./...
+  - go test -v -cover ./...
