@@ -7,6 +7,7 @@ import (
 
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3iface"
+
 	"github.com/kristaxox/go-examples/mockS3"
 )
 
@@ -32,7 +33,7 @@ func (m mockS3Impl) GetObject(input *s3.GetObjectInput) (*s3.GetObjectOutput, er
 	}, nil
 }
 
-// Since the mockS3 struct implements the required s3 api calls that our client
+// Since the mockS3Impl struct implements the required s3 api calls that our client
 // need to make AND is of type s3iface, in our code that actually calls s3 we can
 // the s3iface type instead of s3.S3, and mock out s3 call right in our tests.
 // The input and output contents can be customizes to suit the amount of fileds
@@ -44,7 +45,11 @@ func TestGetObject(t *testing.T) {
 
 	mock.InMemoryStore["foo"] = "bar"
 
-	str, err := mockS3.GetObjectAsString(mock, "foo")
+	myservice := mockS3.Myservice{
+		S3Client: mock,
+	}
+
+	str, err := myservice.GetObjectAsString("foo")
 	if err != nil {
 		t.Fail()
 	}
