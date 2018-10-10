@@ -1,4 +1,4 @@
-# go-examples
+# go-examples [![Build Status](https://travis-ci.com/kristaxox/go-examples.svg?branch=master)](https://travis-ci.com/kristaxox/go-examples)
 A collection of helpful small golang examples
 
 ###
